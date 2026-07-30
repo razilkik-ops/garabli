@@ -1217,7 +1217,7 @@ button {
       rgba(8, 7, 6, 0.58) 42%,
       #090706 78%
     ),
-    url("/assets/manifesto-bg.jpg") center / cover no-repeat;
+    var(--manifesto-background) center / cover no-repeat;
   filter: blur(7px) saturate(70%);
   opacity: 0.6;
 }

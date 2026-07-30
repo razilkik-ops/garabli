@@ -22,6 +22,8 @@ const NAV_ITEMS = [
   { label: "Автор", id: "author", icon: UserCircle },
 ];
 
+const assetUrl = (path) => `${import.meta.env.BASE_URL}${path}`;
+
 const STORY_ITEMS = [
   {
     icon: Eye,
@@ -62,7 +64,7 @@ const AUDIENCE_ITEMS = [
 const PROGRAM_DAYS = [
   {
     title: "Где я? Ревизия и цена моих ошибок",
-    image: "/assets/program-day-1.png",
+    image: assetUrl("assets/program-day-1.png"),
     imageAlt: "Бронзовая винтовая лестница, снятая снизу",
     lessons: [
       "Урок 1. Почему ты бежишь по кругу? Считаем реальную стоимость твоих шишек: сколько времени и нервов уходит на одни и те же действия. Вскрытие сценария и фиксация точек слива сил.",
@@ -71,7 +73,7 @@ const PROGRAM_DAYS = [
   },
   {
     title: "Иллюзия контроля. Сколько можно тащить?",
-    image: "/assets/program-day-2.png",
+    image: assetUrl("assets/program-day-2.png"),
     imageAlt: "Тёмная архитектура с узким лучом тёплого света",
     lessons: [
       "Урок 3. Как перестать везти всё на себе? Разбираем наши социальные роли. Учимся выключать режим сильной женщины и делегировать задачи без страха, что всё рухнет.",
@@ -80,7 +82,7 @@ const PROGRAM_DAYS = [
   },
   {
     title: "Твоя жизнь — твои правила.",
-    image: "/assets/program-day-3.png",
+    image: assetUrl("assets/program-day-3.png"),
     imageAlt: "Слои тёмного материала с бронзовыми подсвеченными краями",
     lessons: [
       "Урок 5. От вечной гонки к нормальной жизни. Разрыв циклических повторений. Заменяем старые обиды на чёткое понимание: кто в окружении свой, а кто — балласт.",
@@ -965,13 +967,19 @@ export function App() {
   };
 
   return (
-    <main>
+    <main
+      style={{
+        "--manifesto-background": `url("${assetUrl(
+          "assets/manifesto-bg.jpg",
+        )}")`,
+      }}
+    >
       <section className="scroll-scene" ref={sceneRef} aria-label="Антиграбли">
         <div className="hero">
           <video
             className="hero-video"
             ref={videoRef}
-            src="/assets/hero-scrub.mp4?v=5501"
+            src={`${assetUrl("assets/hero-scrub.mp4")}?v=5501`}
             preload="auto"
             playsInline
             muted
@@ -1081,7 +1089,7 @@ export function App() {
       <section className="manifesto" id="about" aria-labelledby="manifesto-title">
         <img
           className="manifesto-background"
-          src="/assets/manifesto-bg.jpg"
+          src={assetUrl("assets/manifesto-bg.jpg")}
           alt=""
           aria-hidden="true"
         />
@@ -1126,7 +1134,7 @@ export function App() {
           <figure className="audience-visual">
             <img
               className="audience-image"
-              src="/assets/audience-editorial.png"
+              src={assetUrl("assets/audience-editorial.png")}
               alt="Женщина рядом с прозрачной спиралью ДНК"
             />
             <div className="audience-visual-shade" aria-hidden="true" />
@@ -1274,7 +1282,7 @@ export function App() {
         <div className="author-layout">
           <figure className="author-portrait">
             <img
-              src="/assets/author-konstantin-reference.png"
+              src={assetUrl("assets/author-konstantin-reference.png")}
               alt="Константин Александрович Юманов"
               loading="lazy"
             />
