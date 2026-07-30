@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.DS_Store
+
+# Unused 151 MB master; the site uses hero-scrub.mp4.
+public/assets/hero.mp4
