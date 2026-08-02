@@ -307,7 +307,6 @@ export function App() {
 
   useEffect(() => {
     const revealSelectors = [
-      ".header",
       ".hero-content > *",
       ".about-shell > .lead-copy",
       ".about-shell > .invitation-heading",
@@ -372,6 +371,10 @@ export function App() {
     return () => {
       observer.disconnect();
       document.documentElement.classList.remove("site-motion-ready");
+      revealItems.forEach((item) => {
+        item.classList.remove("site-reveal", "is-visible");
+        item.style.removeProperty("--reveal-delay");
+      });
     };
   }, []);
 
