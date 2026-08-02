@@ -305,6 +305,76 @@ export function App() {
     };
   }, [expandedReview]);
 
+  useEffect(() => {
+    const revealSelectors = [
+      ".header",
+      ".hero-content > *",
+      ".about-shell > .lead-copy",
+      ".about-shell > .invitation-heading",
+      ".about-card",
+      ".quote",
+      ".audience-shell > h2",
+      ".audience-item",
+      ".audience-cta-card",
+      ".results-shell > h2",
+      ".results-divider",
+      ".result-item",
+      ".program .section-shell > h2",
+      ".program-intro",
+      ".program-day",
+      ".format-cta-title",
+      ".format-top-cta",
+      ".format #format-title",
+      ".format-divider",
+      ".format-intro",
+      ".format-step",
+      ".author #author-title",
+      ".author-photo",
+      ".credentials-list > div",
+      ".reviews > h3",
+      ".review-card",
+      ".contact-shell > *",
+      ".footer",
+    ];
+    const revealItems = document.querySelectorAll(revealSelectors.join(","));
+
+    if (!revealItems.length) return undefined;
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+      revealItems.forEach((item) => item.classList.add("is-visible"));
+      return undefined;
+    }
+
+    document.documentElement.classList.add("site-motion-ready");
+
+    revealItems.forEach((item) => {
+      const siblings = item.parentElement ? Array.from(item.parentElement.children) : [];
+      const siblingIndex = Math.max(0, siblings.indexOf(item));
+      item.classList.add("site-reveal");
+      item.style.setProperty("--reveal-delay", `${Math.min(siblingIndex, 4) * 65}ms`);
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -8%" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("site-motion-ready");
+    };
+  }, []);
+
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     setMenuOpen(false);
@@ -503,7 +573,10 @@ export function App() {
 
           <div className="program-days">
             {PROGRAM_DAYS.map((day, dayIndex) => (
-              <article className="program-day" key={day.title}>
+              <article
+                className="program-day"
+                key={day.title}
+              >
                 <figure className="program-image">
                   <img src={day.image} alt={day.imageAlt} />
                   <figcaption>{String(dayIndex + 1).padStart(2, "0")}</figcaption>
