@@ -1,7 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  ArrowLeft,
-  ArrowRight,
   BookOpen,
   CalendarDots,
   Circle,
@@ -288,15 +286,24 @@ function CtaLink({ children, className = "" }) {
 
 export function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeReview, setActiveReview] = useState(0);
+  const [expandedReview, setExpandedReview] = useState(null);
 
-  const showPreviousReview = () => {
-    setActiveReview((current) => (current - 1 + REVIEWS.length) % REVIEWS.length);
-  };
+  useEffect(() => {
+    if (expandedReview === null) return undefined;
 
-  const showNextReview = () => {
-    setActiveReview((current) => (current + 1) % REVIEWS.length);
-  };
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setExpandedReview(null);
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [expandedReview]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -581,53 +588,66 @@ export function App() {
 
           <div className="reviews" aria-labelledby="reviews-title">
             <h3 id="reviews-title">Отзывы о курсе:</h3>
-            <div className="review-carousel">
-              <div className="review-tabs" role="tablist" aria-label="Выберите отзыв">
-                {REVIEWS.map((review, index) => (
+            <div className="review-card-row">
+              {REVIEWS.map((review, index) => (
+                <article className="review-card" key={review.label}>
                   <button
-                    className={`review-tab${activeReview === index ? " is-active" : ""}`}
+                    className="review-card-button"
                     type="button"
-                    role="tab"
-                    aria-selected={activeReview === index}
-                    aria-controls={`review-panel-${index}`}
-                    id={`review-tab-${index}`}
-                    onClick={() => setActiveReview(index)}
-                    key={review.label}
+                    onClick={() => setExpandedReview(index)}
+                    aria-haspopup="dialog"
+                    aria-label={`Открыть отзыв «${review.label}»`}
                   >
-                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <span className="review-card-heading">
+                      <Quotes aria-hidden="true" weight="thin" />
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                    </span>
                     <strong>{review.label}</strong>
+                    <span className="review-card-preview">{review.text}</span>
+                    <span className="review-card-action">Читать отзыв</span>
                   </button>
-                ))}
-              </div>
-
-              <div
-                className="review-panel"
-                role="tabpanel"
-                id={`review-panel-${activeReview}`}
-                aria-labelledby={`review-tab-${activeReview}`}
-                key={activeReview}
-              >
-                <div className="review-panel-topline">
-                  <Quotes aria-hidden="true" weight="thin" />
-                  <span>{String(activeReview + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}</span>
-                </div>
-                <blockquote>
-                  <p>{REVIEWS[activeReview].text}</p>
-                  <footer>
-                    <strong>{REVIEWS[activeReview].author}</strong>
-                    <span>Практикум «Анти - грабли»</span>
-                  </footer>
-                </blockquote>
-                <div className="review-controls" aria-label="Навигация по отзывам">
-                  <button type="button" onClick={showPreviousReview} aria-label="Предыдущий отзыв">
-                    <ArrowLeft aria-hidden="true" />
-                  </button>
-                  <button type="button" onClick={showNextReview} aria-label="Следующий отзыв">
-                    <ArrowRight aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
+                </article>
+              ))}
             </div>
+
+            {expandedReview !== null && (
+              <div
+                className="review-modal-backdrop"
+                onMouseDown={(event) => {
+                  if (event.target === event.currentTarget) setExpandedReview(null);
+                }}
+              >
+                <div
+                  className="review-modal"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="expanded-review-title"
+                >
+                  <div className="review-modal-topline">
+                    <span>
+                      {String(expandedReview + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setExpandedReview(null)}
+                      aria-label="Закрыть отзыв"
+                      autoFocus
+                    >
+                      <X aria-hidden="true" />
+                    </button>
+                  </div>
+                  <Quotes className="review-modal-quote" aria-hidden="true" weight="thin" />
+                  <h4 id="expanded-review-title">{REVIEWS[expandedReview].label}</h4>
+                  <blockquote>
+                    <p>{REVIEWS[expandedReview].text}</p>
+                    <footer>
+                      <strong>{REVIEWS[expandedReview].author}</strong>
+                      <span>Практикум «Анти - грабли»</span>
+                    </footer>
+                  </blockquote>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
