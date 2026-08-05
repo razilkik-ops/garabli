@@ -7,7 +7,6 @@ import {
   LightbulbFilament,
   ListNumbers,
   Minus,
-  Quotes,
   Sparkle,
   Target,
   TelegramLogo,
@@ -58,7 +57,7 @@ const ABOUT_DETAILS = [
     alt: "Иконка цели",
     content: (
       <>
-        Я приглашаю вас на <strong>трехдневный практикум «Анти - грабли»</strong>,
+        Я приглашаю вас на <strong>трехдневный практикум «Анти-грабли»</strong>,
         где мы разберем, как сбросить изнуряющее напряжение и вернуть контроль над
         своим состоянием.
       </>
@@ -86,10 +85,16 @@ const ABOUT_STATS = [
     label: "практики и анализа",
   },
   {
-    icon: assetUrl("assets/about-icon-group.png"),
-    alt: "Иконка группы людей",
-    value: "Тысячи",
-    label: "разобранных ситуаций",
+    icon: assetUrl("assets/about-icon-military-psychologist.png"),
+    alt: "Иконка профессиональной основы",
+    value: "Военный психолог",
+    label: "профессиональный фундамент",
+  },
+  {
+    icon: assetUrl("assets/about-icon-tv-host.png"),
+    alt: "Иконка медийности",
+    value: "Телеведущий",
+    label: "многолетний стаж работы",
   },
   {
     icon: assetUrl("assets/about-icon-target.png"),
@@ -255,19 +260,19 @@ const AUTHOR_CREDENTIALS = [
 
 const REVIEWS = [
   {
-    label: "Границы и спокойствие",
-    author: "Участница практикума",
-    text: "За три дня практикума ,которые просто пролетели, но каждый шаг был таким точным и не было никакой лишней инфы — только четкие схемы, которые работают в жизни, я осознала , как мой привычный режим «всё держать под контролем» незаметно перетёк в отношения, и почему я так сильно устаю. Сейчас у меня благодаря Вам есть простые инструменты, как мягко обозначать свои границы и говорить «нет» без чувства вины. И впервые за долгое время я чувствую, как мои плечи расслабляются и уходит напряжение. От всей души благодарю Вас ❤️",
+    label: "Отзыв 01",
+    image: assetUrl("assets/review-screenshot-1.png"),
+    alt: "Скриншот отзыва о практикуме: участница благодарит за четкие схемы, границы и снятие напряжения",
   },
   {
-    label: "Лёгкость вместо контроля",
-    author: "Ольга",
-    text: "Перед тем, как прийти на курс, думала, что мне просто не везет в отношениях. А на практикуме всё вдруг встало на свои места. Я увидела, как от желания безопасности начинаю слишком много контролировать и брать на себя, даже когда хочется просто тепла. И главное — поняла, что этим можно мягко управлять. На душе стало так легко! Теперь прихожу домой и могу просто выдохнуть, не держать всё в голове. Спасибо за такую ясную, теплую работу без воды — будто сняли",
+    label: "Отзыв 02",
+    image: assetUrl("assets/review-screenshot-2.png"),
+    alt: "Скриншот отзыва Ольги о практикуме: про легкость, тепло и управление контролем",
   },
   {
-    label: "Тепло в отношениях",
-    author: "Участница практикума",
-    text: "Да, конечно! Я всегда была уверена: быть сильной — значит не расслабляться ни на секунду. А за три дня на практикуме вдруг поняла: это не сила, а тихая усталость от попытки всё удержать. Сил на близких уже просто не оставалось. На занятиях я увидела, где беру слишком много на себя, и получила простые шаги, как безопасно отключить этот изматывающий режим «я всё сама». Даже дышать стало как-то легче. И как ни удивительно, когда я начала управлять своим контролем, отношения с мужем и детьми стали ближе и теплее.",
+    label: "Отзыв 03",
+    image: assetUrl("assets/review-screenshot-3.png"),
+    alt: "Скриншот отзыва Екатерины о практикуме: про усталость, режим я всё сама и тепло в отношениях",
   },
 ];
 
@@ -436,7 +441,7 @@ export function App() {
         </header>
 
         <div className="hero-content">
-          <h1 id="hero-title">«Анти - грабли»</h1>
+          <h1 id="hero-title">«Анти-грабли»</h1>
           <p className="hero-subtitle">
             Системный 3-х дневный практикум по выходу из замкнутого круга в личных
             отношениях: от "стального режима" к партнерству на равных.
@@ -525,7 +530,7 @@ export function App() {
           <article className="audience-cta-card">
             <div className="audience-cta-content">
               <h3 className="cta-title">
-                Позволь себе выдохнуть и принять участие в практикуме «Антиграбли»
+                Позволь себе выдохнуть и принять участие в практикуме «Анти-грабли»
               </h3>
               <CtaLink className="section-cta">Перейти в группу</CtaLink>
             </div>
@@ -562,11 +567,11 @@ export function App() {
       <section className="section program" id="program" aria-labelledby="program-title">
         <div className="section-shell">
           <h2 id="program-title">
-            Программа 3-х дневного практикума
+            Программа <span className="program-title-small">3-х</span> дневного практикума
             <br />
-            “Анти - грабли”
+            “Анти-грабли”
             <br />
-            Авторская методология К.Юманова.
+            <span className="program-title-method">Авторская методология К.Юманова.</span>
           </h2>
           <p className="program-intro">
             Система решений разделена на четкие, алгоритмические этапы. Никакой
@@ -582,7 +587,7 @@ export function App() {
               >
                 <figure className="program-image">
                   <img src={day.image} alt={day.imageAlt} />
-                  <figcaption>{String(dayIndex + 1).padStart(2, "0")}</figcaption>
+                  <figcaption>День {dayIndex + 1}</figcaption>
                 </figure>
                 <div className="program-copy">
                   <h3>{day.title}</h3>
@@ -672,15 +677,13 @@ export function App() {
                     type="button"
                     onClick={() => setExpandedReview(index)}
                     aria-haspopup="dialog"
-                    aria-label={`Открыть отзыв «${review.label}»`}
+                    aria-label={`Открыть ${review.label} в большом размере`}
                   >
-                    <span className="review-card-heading">
-                      <Quotes aria-hidden="true" weight="thin" />
-                      <span>{String(index + 1).padStart(2, "0")}</span>
+                    <img src={review.image} alt={review.alt} loading="lazy" />
+                    <span className="review-card-number" aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
                     </span>
-                    <strong>{review.label}</strong>
-                    <span className="review-card-preview">{review.text}</span>
-                    <span className="review-card-action">Читать отзыв</span>
+                    <span className="review-card-action">Открыть</span>
                   </button>
                 </article>
               ))}
@@ -700,9 +703,7 @@ export function App() {
                   aria-labelledby="expanded-review-title"
                 >
                   <div className="review-modal-topline">
-                    <span>
-                      {String(expandedReview + 1).padStart(2, "0")} / {String(REVIEWS.length).padStart(2, "0")}
-                    </span>
+                    <h4 id="expanded-review-title">{REVIEWS[expandedReview].label}</h4>
                     <button
                       type="button"
                       onClick={() => setExpandedReview(null)}
@@ -712,15 +713,11 @@ export function App() {
                       <X aria-hidden="true" />
                     </button>
                   </div>
-                  <Quotes className="review-modal-quote" aria-hidden="true" weight="thin" />
-                  <h4 id="expanded-review-title">{REVIEWS[expandedReview].label}</h4>
-                  <blockquote>
-                    <p>{REVIEWS[expandedReview].text}</p>
-                    <footer>
-                      <strong>{REVIEWS[expandedReview].author}</strong>
-                      <span>Практикум «Анти - грабли»</span>
-                    </footer>
-                  </blockquote>
+                  <img
+                    className="review-modal-image"
+                    src={REVIEWS[expandedReview].image}
+                    alt={REVIEWS[expandedReview].alt}
+                  />
                 </div>
               </div>
             )}
@@ -756,7 +753,7 @@ export function App() {
             </a>
           </div>
           <p className="contact-promise">
-            Позволь себе вдохнуть и начать жить по собственным правилам.
+            Позволь себе выдохнуть и начать жить по собственным правилам.
           </p>
           <CtaLink className="final-cta">
             Принять участие в практикуме
