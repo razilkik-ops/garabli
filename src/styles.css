@@ -1227,18 +1227,6 @@ dd {
   transform: scale(1.018);
 }
 
-.review-card-number {
-  position: absolute;
-  top: 28px;
-  left: 28px;
-  z-index: 2;
-  color: var(--cream);
-  font-family: var(--display);
-  font-size: clamp(34px, 3.5vw, 54px);
-  line-height: 1;
-  text-shadow: 0 8px 26px rgba(12, 7, 5, 0.44);
-}
-
 .review-card-action {
   position: absolute;
   right: 28px;
@@ -1722,12 +1710,6 @@ dd {
 
   .review-card-button img {
     border-radius: 18px;
-  }
-
-  .review-card-number {
-    top: 22px;
-    left: 22px;
-    font-size: 34px;
   }
 
   .review-card-action {

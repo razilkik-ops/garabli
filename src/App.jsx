@@ -260,17 +260,17 @@ const AUTHOR_CREDENTIALS = [
 
 const REVIEWS = [
   {
-    label: "Отзыв 01",
+    label: "Отзыв участницы",
     image: assetUrl("assets/review-screenshot-1.png"),
     alt: "Скриншот отзыва о практикуме: участница благодарит за четкие схемы, границы и снятие напряжения",
   },
   {
-    label: "Отзыв 02",
+    label: "Отзыв Ольги",
     image: assetUrl("assets/review-screenshot-2.png"),
     alt: "Скриншот отзыва Ольги о практикуме: про легкость, тепло и управление контролем",
   },
   {
-    label: "Отзыв 03",
+    label: "Отзыв Екатерины",
     image: assetUrl("assets/review-screenshot-3.png"),
     alt: "Скриншот отзыва Екатерины о практикуме: про усталость, режим я всё сама и тепло в отношениях",
   },
@@ -680,9 +680,6 @@ export function App() {
                     aria-label={`Открыть ${review.label} в большом размере`}
                   >
                     <img src={review.image} alt={review.alt} loading="lazy" />
-                    <span className="review-card-number" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
                     <span className="review-card-action">Открыть</span>
                   </button>
                 </article>
